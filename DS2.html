@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('backgroudImage.jpg');
+            background-size: cover;
+
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .dashboard-heading {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-container {
+            width: 50%;
+            margin: auto;
+            background-color: #dadfe9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .visualization-section1 {
+            width: 100%;
+            height: 400px;
+        }
+
+        .visualization-section2 {
+            flex-basis: 60%;
+            height: 400px;
+        }
+
+        .visualization-section3 {
+            width: 100%;
+            height: 400px;
+            margin-top: 5%;
+        }
+
+        .visualization-section4 {
+            width: 100%;
+            height: 400px;
+        }
+
+
+        .text-blocks-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            padding: 0 20px;
+            margin-top: 5%;
+        }
+
+        .text-block {
+            width: 33.33%;
+            box-sizing: border-box;
+            margin: 0 10px;
+        }
+
+        .text-block-header {
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .text-block p {
+            font-size: 1.2em;
+        }
+
+        .dashboard-container p {
+            font-size: 1.2em;
+        }
+
+        .text-blockTop10 {
+            flex-basis: 40%;
+            font-size: 1.2em;
+            margin-top: 3%;
+            margin-right: 3%;
+        }
+
+        .text-blockEnd {
+            flex-basis: 40%;
+            font-size: 1.2em;
+            margin-right: 3%;
+        }
+
+        .row-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            /* or 'flex-start' if you want them to be aligned to the left */
+            align-items: flex-start;
+            /* aligns items to the top of the container */
+        }
+
+        .row-container1 {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            /* or 'flex-start' if you want them to be aligned to the left */
+            align-items: flex-start;
+            /* aligns items to the top of the container */
+            margin-top: 5%;
+        }
+
+        .text-block4 {
+            margin-top: 2%;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-heading">
+            <h1>COVID-19 Global Impact Report</h1>
+        </div>
+        <p>
+            COVID-19 is a highly infectious disease caused by the SARS-CoV-2 virus. First identified in December 2019 in
+            Wuhan,
+            China, it rapidly spread across the globe, leading to an unprecedented pandemic. The disease manifests with
+            a
+            spectrum of symptoms ranging from mild to severe, including fever, cough, and difficulty breathing. Severe
+            cases can
+            lead to pneumonia, multiple organ failure, and death, particularly in older adults and those with underlying
+            health
+            conditions. COVID-19 is primarily transmitted through respiratory droplets when an infected person coughs,
+            sneezes,
+            or talks. It spurred worldwide efforts in public health to develop vaccines, treatments, and preventive
+            measures to
+            curb its spread, profoundly impacting global society, economies, and daily life.
+        </p>
+        <div id="vis1" class="visualization-section1"></div>
+        <div class="text-blocks-container">
+            <div class="text-block">
+                <div class="text-block-header">Confirmed Cases</div>
+                <p>
+                    The map illustrates that the United States, Brazil, and India have a high number of confirmed
+                    COVID-19
+                    cases, marked by darker colors. This could be attributed to various factors such as a high
+                    population
+                    density, the nature and timing of government interventions, testing rates, and healthcare
+                    infrastructure. Europe also exhibits significant case numbers, possibly due to earlier exposure to
+                    the
+                    virus, international travel, and population age.
+                </p>
+            </div>
+            <div class="text-block">
+                <div class="text-block-header">Deaths</div>
+                <p>
+                    The death toll is notably high in the United States and Brazil. Multiple factors could contribute to
+                    this, such as healthcare system capacity, the prevalence of comorbidities among the population, and
+                    the
+                    effectiveness of treatment strategies deployed. European nations also display significant death
+                    counts,
+                    perhaps reflecting the challenges faced during the early stages of the pandemic, including hospital
+                    overloads and limited testing capabilities.
+                </p>
+            </div>
+            <div class="text-block">
+                <div class="text-block-header">Recoveries</div>
+                <p>
+                    Recovery rates seem proportionally related to the confirmed case numbers. Countries with high
+                    confirmed
+                    cases, like the United States, Brazil, and India, also show substantial recoveries. This could be
+                    influenced by the time since the onset of the outbreak in each country, the resilience of the
+                    population, and the effectiveness of treatments used. However, it's also essential to consider the
+                    varying criteria and accuracy in reporting recovery statistics across different countries and
+                    regions.
+                </p>
+            </div>
+        </div>
+
+        <div class="row-container">
+            <div id="vis2" class="visualization-section2"></div>
+            <div class="text-blockTop10">
+                The bar graph illustrates the COVID-19 confirmed cases in various countries, with the United States
+                leading,
+                followed by Brazil and India. Multiple factors could contribute to these numbers, such as population
+                size, testing
+                rates, and healthcare systems efficacy. Additionally, governmental responses, like the enforcement of
+                lockdowns and
+                mask mandates, as well as public adherence to these guidelines, can significantly impact case numbers.
+                Countries
+                with extensive testing, robust healthcare systems, stringent policies, and high public compliance are
+                likely to
+                report fewer cases, despite the high transmission rate of the virus.
+
+            </div>
+        </div>
+
+        <div id="vis3" class="visualization-section3"></div>
+        <div class="text-blocks-container">
+            <div class="text-block">
+                <div class="text-block-header">Deaths per 100 Cases</div>
+                <p>
+                    The visualization manifests a noticeable disparity among different WHO regions concerning the
+                    deaths per 100 COVID-19 cases. The Americas and Europe stand out with relatively elevated values in
+                    this metric. These regions heightened values could be intricately linked to various interconnected
+                    factors. A plausible explanation might revolve around the demographic composition of these areas,
+                    where a higher prevalence of comorbidities such as obesity, diabetes, and heart-related conditions
+                    could potentially escalate the fatality rates. Additionally, the readiness, accessibility, and
+                    overall robustness of the healthcare systems play a pivotal role. An overwhelmed healthcare system
+                    may struggle to provide adequate and timely care, subsequently affecting the outcomes adversely.
+                </p>
+            </div>
+            <div class="text-block">
+                <div class="text-block-header">Recovered per 100 Cases</div>
+                <p>
+                    A marked variation is evident in the recovery rates across the WHO
+                    regions. The Americas region conspicuously leads in recovery rates, signifying a more favorable
+                    outcome for the majority of the confirmed cases. Such a scenario might be indicative of effective
+                    healthcare strategies and medical treatments deployed in managing the cases. It could also be
+                    reflective of a comprehensive and more accurate reporting system that meticulously accounts for all
+                    recoveries. The effective dissemination of health information and guidance could also facilitate
+                    early and appropriate medical interventions, contributing to enhanced recovery rates.
+                </p>
+            </div>
+            <div class="text-block">
+                <div class="text-block-header">Deaths per 100 Recovered</div>
+                <p>
+                    Europe and the Americas seem to be grappling with a higher ratio of
+                    deaths per 100 recovered cases. This metric, revealing a stark contrast in the survival outcomes,
+                    might be emblematic of the challenges inherent in the healthcare paradigms of these regions. It
+                    underscores the exigencies and complexities encountered in navigating the pandemic, such as hospital
+                    capacity, availability of essential medical supplies, and the efficacy of treatment protocols.
+                    Moreover, societal factors, including the prevalence of health-disadvantaging conditions and the
+                    ability to access and utilize healthcare resources effectively, could also wield substantial
+                    influence in shaping this metric.
+                </p>
+            </div>
+        </div>
+        <div id="vis4" class="visualization-section4"></div>
+        <div class="text-block4">
+            This visualization depicts the weekly change in COVID-19 cases across various countries, with circle sizes
+            representing total confirmed cases. The United States shows a large absolute increase but a smaller relative
+            increase, indicating a substantial numeric rise in cases compared to the already high total. Brazil and
+            India also
+            exhibit significant numeric increases, indicating a continual rapid spread, while South Africa and Colombia,
+            despite
+            lower total cases, show substantial relative increases, pointing to a potentially accelerating spread in
+            these
+            regions. The differences might be attributed to factors such as varying testing rates, population densities,
+            effectiveness of public health measures, and the robustness of healthcare infrastructures in these
+            countries.
+        </div>
+        <div class="row-container1">
+            <div class="text-blockEnd">
+                A prominent increase in confirmed cases is observed, following a steep curve, highlighting a rapid
+                spread of the virus. The recovery curve also follows an upward trajectory but lags behind the confirmed
+                cases, signifying that a substantial number of cases are still active or pending recovery. The death
+                curve, while lower, shows a steady increase, reflecting the ongoing loss of life due to the virus. The
+                graph illustrates the pandemic's evolving nature, emphasizing the significant challenge posed by the
+                rising cases, which impacts the healthcare systems and communities. It also underscores the importance
+                of continued public health measures, medical interventions, and vaccination efforts to manage and
+                mitigate the spread of COVID-19.
+            </div>
+            <div id="vis5" class="visualization-section2"></div>
+        </div>
+    </div>
+    <!-- Separate Scripts for Each Visualization -->
+    <script>
+        const spec1 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "title": "COVID-19 Confirmed Cases, Deaths, and Recovered",
+            "width": "container",
+            "height": "container",
+            "background": "#dadfe9",
+            "data": {
+                "url": "https://raw.githubusercontent.com/GREADISE/COVID-19Dataset/6675e4570693df9f808f00eac7fc9b3c16c1b9af/ne_110m_admin_0_countries.topojson",
+                "format": { "type": "topojson", "feature": "ne_110m_admin_0_countries" }
+            },
+            "projection": { "type": "equalEarth" },
+            "params": [
+                {
+                    "name": "metric",
+                    "value": "Confirmed",
+                    "bind": {
+                        "input": "select",
+                        "options": ["Confirmed", "Deaths", "Recovered"],
+                        "labels": ["Confirmed Cases", "Deaths", "Recovered Cases"],
+                        "name": "Options: "
+                    }
+                }
+            ],
+            "layer": [
+                {
+                    "transform": [
+                        {
+                            "calculate": "'Data is not available in ' + datum.properties.NAME",
+                            "as": "note"
+                        }
+                    ],
+                    "mark": { "type": "geoshape", "fill": "lightgray", "stroke": "white" },
+                    "encoding": { "tooltip": { "field": "note" } }
+                },
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/GREADISE/COVID-19Dataset/main/oceans.topojson",
+                        "format": { "type": "topojson", "feature": "oceans" }
+                    },
+                    "mark": { "type": "geoshape", "fill": "skyblue" }
+                },
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/GREADISE/COVID-19Dataset/main/WorldMapWithGraticules.topojson",
+                        "format": { "type": "topojson", "feature": "ne_110m_graticules_30" }
+                    },
+                    "mark": { "type": "geoshape", "fill": null, "stroke": "lightgray" }
+                },
+                {
+                    "transform": [
+                        {
+                            "lookup": "properties.NAME",
+                            "from": {
+                                "data": {
+                                    "url": "https://raw.githubusercontent.com/GREADISE/COVID-19Dataset/main/country_wise_latest.csv"
+                                },
+                                "key": "Country/Region",
+                                "fields": ["Confirmed", "Deaths", "Recovered"]
+                            }
+                        },
+                        {
+                            "calculate": "if (metric === 'Confirmed', datum.Confirmed, if (metric === 'Deaths', datum.Deaths, datum.Recovered))",
+                            "as": "selected_metric"
+                        },
+                        {
+                            "calculate": "if (metric === 'Confirmed', 'Confirmed Cases', if (metric === 'Deaths', 'Deaths', 'Recovered Cases'))",
+                            "as": "selected_metric_name"
+                        }
+                    ],
+                    "mark": { "type": "geoshape", "stroke": "white" },
+                    "encoding": {
+                        "color": {
+                            "condition": {
+                                "param": "metric",
+                                "title": { "expr": "selected_metric_name" },
+                                "field": "selected_metric",
+                                "type": "quantitative",
+                                "scale": {
+                                    "domain": [100, 1000, 10000, 100000, 1000000],
+                                    "range": [
+                                        "#fee5d9",
+                                        "#fcbba1",
+                                        "#fc9272",
+                                        "#fb6a4a",
+                                        "#de2d26",
+                                        "#a50f15"
+                                    ]
+                                }
+                            },
+                            "value": "lightgray"
+                        },
+                        "tooltip": [
+                            { "field": "properties.NAME", "type": "nominal", "title": "Country" },
+                            {
+                                "field": "Confirmed",
+                                "type": "quantitative",
+                                "title": "Confirmed"
+                            },
+                            { "field": "Deaths", "type": "quantitative" },
+                            { "field": "Recovered", "type": "quantitative" }
+                        ]
+                    }
+                }
+            ],
+            "config": {}
+        };
+        vegaEmbed("#vis1", spec1, { mode: "vega-lite" }).then(console.log).catch(console.warn);
+    </script>
+
+    <script>
+        const spec2 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "title": "Top 10 Countries by Confirmed COVID-19 Cases",
+            "width": "container",
+            "height": "container",
+            "background": "#dadfe9",
+            "data": {
+                "url": "https://raw.githubusercontent.com/GREADISE/COVID-19Dataset/main/country_wise_latest.csv"
+            },
+            "transform": [
+                { "calculate": "toNumber(datum.Confirmed)", "as": "Confirmed_Num" },
+                {
+                    "sort": [{ "field": "Confirmed_Num", "order": "descending" }],
+                    "window": [{ "op": "row_number", "as": "rank" }]
+                },
+                { "filter": "datum.rank <= 10" }
+            ],
+            "layer": [
+                {
+                    "mark": "bar",
+                    "encoding": {
+                        "y": {
+                            "field": "Country/Region",
+                            "type": "ordinal",
+                            "title": "Country/Region",
+                            "sort": "-x"
+                        },
+                        "x": {
+                            "field": "Confirmed",
+                            "type": "quantitative",
+                            "title": "Confirmed Cases"
+                        },
+                        "tooltip": [
+                            {
+                                "field": "Country/Region",
+                                "type": "ordinal"
+                            },
+                            {
+                                "field": "Confirmed",
+                                "type": "quantitative",
+                                "title": "Confirmed Cases"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "align": "left",
+                        "baseline": "middle",
+                        "dx": 3 // adjusts the x-position of the text (use negative value to move text left)
+                    },
+                    "encoding": {
+                        "y": {
+                            "field": "Country/Region",
+                            "type": "ordinal",
+                            "sort": "-x"
+                        },
+                        "x": {
+                            "field": "Confirmed",
+                            "type": "quantitative"
+                        },
+                        "text": {
+                            "field": "Confirmed",
+                            "type": "quantitative"
+                        }
+                    }
+                }
+            ],
+            "config": {
+                "axis": { "labelFontSize": 12, "titleFontSize": 14 },
+                "title": { "fontSize": 16 }
+            }
+        };
+        vegaEmbed("#vis2", spec2, { mode: "vega-lite" }).then(console.log).catch(console.warn);
+    </script>
+
+    <script>
+        const spec3 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "data": {
+                "url": "https://raw.githubusercontent.com/GREADISE/COVID-19Dataset/main/country_wise_latest.csv"
+            },
+            "title": "Analysis of COVID-19 Cases Across WHO Regions",
+            "width": "container",
+            "height": "container",
+            "background": "#dadfe9",
+            "params": [
+                {
+                    "name": "metric",
+                    "value": "Recovered / 100 Cases",
+                    "bind": {
+                        "input": "select",
+                        "options": [
+                            "Deaths / 100 Cases",
+                            "Recovered / 100 Cases",
+                            "Deaths / 100 Recovered"
+                        ],
+                        "name": "Options: "
+                    }
+                }
+            ],
+            "transform": [{ "calculate": "datum[metric]", "as": "selected_metric" }],
+            "mark": { "type": "boxplot", "size": 40 },
+            "encoding": {
+                "y": { "field": "WHO Region", "type": "ordinal", "title": "WHO Region" },
+                "x": { "field": "selected_metric", "type": "quantitative", "title": "Option" },
+                "tooltip": [
+                    { "field": "Country/Region", "type": "nominal", "title": "Country/Region" },
+                    {
+                        "field": "selected_metric",
+                        "type": "quantitative",
+                        "title": "selected_metric"
+                    }
+                ]
+            },
+            "config": {
+                "axis": { "labelFontSize": 16, "titleFontSize": 18 },
+                "title": { "fontSize": 16 }
+            }
+        };
+        vegaEmbed("#vis3", spec3, { mode: "vega-lite" }).then(console.log).catch(console.warn);
+    </script>
+
+    <script>
+        const spec4 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": "container",
+            "height": "container",
+            "title": " Weekly COVID-19 Case Growth Across Countries",
+            "background": "#dadfe9",
+            "data": {
+                "url": "https://raw.githubusercontent.com/GREADISE/COVID-19Dataset/main/country_wise_latest.csv",
+            },
+            "transform": [
+                { "calculate": "toNumber(datum['Confirmed'])", "as": "Confirmed_num" },
+                {
+                    "calculate": "toNumber(datum['1 week % increase'])",
+                    "as": "one_week_increase_num"
+                },
+                {
+                    "calculate": "toNumber(datum['1 week change'])",
+                    "as": "one_week_change_num"
+                },
+                {
+                    "window": [{ "op": "rank", "as": "rank" }],
+                    "sort": [{ "field": "one_week_change_num", "order": "descending" }]
+                }
+            ],
+            "layer": [
+                {
+                    "mark": "point",
+                    "encoding": {
+                        "x": {
+                            "field": "one_week_increase_num",
+                            "type": "quantitative",
+                            "title": "1 Week % Increase"
+                        },
+                        "y": {
+                            "field": "one_week_change_num",
+                            "type": "quantitative",
+                            "title": "1 Week Change"
+                        },
+                        "size": {
+                            "field": "Confirmed_num",
+                            "type": "quantitative",
+                            "title": "Confirmed Cases"
+                        },
+                        "color": {
+                            "condition": { "test": "datum.rank <= 5", "value": "red" },
+                            "value": "steelblue"
+                        },
+                        "tooltip": [
+                            { "field": "Country/Region", "type": "nominal" },
+                            { "field": "Confirmed_num", "type": "quantitative" },
+                            { "field": "one_week_change_num", "type": "quantitative" },
+                            { "field": "one_week_increase_num", "type": "quantitative" }
+                        ]
+                    }
+                },
+                {
+                    "mark": { "type": "text", "fontSize": 14, "dx": 0, "dy": 15 },
+                    "encoding": {
+                        "text": {
+                            "condition": {
+                                "test": "datum.rank <= 5",
+                                "field": "Country/Region",
+                                "type": "nominal"
+                            }
+                        },
+                        "x": { "field": "one_week_increase_num", "type": "quantitative" },
+                        "y": { "field": "one_week_change_num", "type": "quantitative" }
+                    }
+                }
+            ]
+        };
+        vegaEmbed("#vis4", spec4, { mode: "vega-lite" }).then(console.log).catch(console.warn);
+    </script>
+
+    <script>
+        const spec5 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "data": {
+                "url": "https://raw.githubusercontent.com/GREADISE/COVID-19Dataset/main/day_wise.csv"
+            },
+            "transform": [
+                { "fold": ["Confirmed", "Deaths", "Recovered"], "as": ["Category", "Cases"] }
+            ],
+            "width": "container",
+            "height": "container",
+            "background": "#dadfe9",
+            "title": "COVID-19 Trajectory: A Timeline of Cases, Deaths, and Recoveries",
+            "mark": "line",
+            "encoding": {
+                "x": {
+                    "field": "Date",
+                    "type": "temporal",
+                    "axis": { "title": "Date", "labelAngle": -45 }
+                },
+                "y": {
+                    "field": "Cases",
+                    "type": "quantitative",
+                    "axis": { "title": "Number of Cases" }
+                },
+                "color": {
+                    "field": "Category",
+                    "type": "nominal",
+                    "legend": { "title": "Case Type" }
+                },
+                "tooltip": [
+                    { "field": "Date", "type": "temporal", "title": "Date" },
+                    { "field": "Cases", "type": "quantitative", "title": "Cases" },
+                    { "field": "Category", "type": "nominal", "title": "Category" }
+                ]
+            },
+            "config": {}
+        };
+        vegaEmbed("#vis5", spec5, { mode: "vega-lite" }).then(console.log).catch(console.warn);
+    </script>
+
+</body>
+
+</html>
